@@ -13,7 +13,7 @@
 	*/
 	
 	//Common
-	include("./command/command.php");
+	include("./command/common.php");
 	
 	if ($_GET['send']=='true') {
 		//Loading Send Part

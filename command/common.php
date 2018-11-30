@@ -13,7 +13,6 @@
 	*/
 	
 	session_start();
-	error_reporting(E_ALL^E_NOTICE^E_WARNING); //关闭php提示
 	
 	//Installed or not
 	if(!file_exists('./install/install.lock') && !file_exists('../install/install.lock')){
@@ -32,9 +31,9 @@
 	$info_application='FSKYPHP-Note Release 3.00 ';
 	
 	//Include
-	include("./function.php");
-	include("./config.php");
-	include("./connsql.php");
-	include("./loading.php");
+	include("function.php");
+	include("config.php");
+	include("connsql.php");
+	include("loading.php");
 
 ?>

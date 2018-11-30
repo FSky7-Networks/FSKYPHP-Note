@@ -27,11 +27,11 @@
 		if ($_COOKIE['sendt']!="clock") {
 			setcookie("sendt", "clock", time()+$config['sendt']);
 			mysqli_query($mysql_conn,"INSERT INTO ".$mysql_tag."list (`fromname` ,`toname` ,`content` ,`lastdate` ,`ip`) VALUES ('".$send_fromname."',  '".$send_toname."',  '".$send_content."',  '".$send_lastdate."',  '".$send_ip."');");
-			echo '<script type="text/javascript">window.location.href="index.php";</script>';
+			echo '<script type="text/javascript">window.location.href="./";</script>';
 		} else {
-			echo '<script type="text/javascript">window.location.href="index.php?warning='.urlencode('<b>留言发送失败</b> 留言发送间隔 : '.$config['sendt'].' 秒').'";</script>';
+			echo '<script type="text/javascript">window.location.href="./?warning='.urlencode('<b>留言发送失败</b> 留言发送间隔 : '.$config['sendt'].' 秒').'";</script>';
 		}
 	} else {
-		echo '<script type="text/javascript">window.location.href="index.php?warning='.urlencode('<b>留言发送失败</b> 缺少内容 ( 发送方 / 接收方 / 邮箱 / 内容 ) ').'";</script>';
+		echo '<script type="text/javascript">window.location.href="./?warning='.urlencode('<b>留言发送失败</b> 缺少内容 ( 发送方 / 接收方 / 邮箱 / 内容 ) ').'";</script>';
 	}
 ?>
