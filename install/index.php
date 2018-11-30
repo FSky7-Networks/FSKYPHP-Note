@@ -5,16 +5,23 @@
 		模块 : 安装程序
 		时间 : 2018/11/30
 		环境 : LNMP PHP7.1
+		编写 : FlyingSky
+		版本 : Release 3.0
 		
 		Copyright 2018 FlyingSky .
 	*/
+
 	session_start();
+
+	//Check step
 	$do=isset($_GET['do'])?$_GET['do']:'0';
 	if(file_exists('install.lock')){
+		//Installed
 		$installed=true;
 		$do='0';
 	}
 	
+	//Function
 	function checkfunc($f,$m = false) {
 		if (function_exists($f)) {
 			return '<font color="green">可用</font>';
@@ -26,7 +33,6 @@
 			}
 		}
 	}
-
 	function checkclass($f,$m = false) {
 		if (class_exists($f)) {
 			return '<font color="green">可用</font>';
@@ -90,10 +96,12 @@
 					</a>
 				</div>
 			</header>
-			<main class="mdl-layout__content" style="padding: 8px;">
+			<main class="mdl-layout__content" style="padding: 16px;">
 				<div class="page-content" align="center">
 					<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="left">
-					<?php if($do=='0'){
+					<?php
+						if($do=='0'){
+						//Step 0 - Start
 					?>
 						<div class="mdl-card__supporting-text" align="center">
 							<h3 style="margin: 4px;">安装向导</h3>
@@ -109,16 +117,17 @@
 						<div class="mdl-card__actions mdl-card--border" align="center">
 							<?php if($installed){ ?>
 								<a class="mdl-button">
-									您已经安装过，如需重新安装请删除<font color="red"> install/install.lock </font>文件后再安装！
+									您已经安装过，如需重新安装请删除<font color="red"><b> install/install.lock </b></font>文件后再安装！
 								</a>
 							<?php }else{?>
-								<a class="mdl-button mdl-button--colored" href="index.php?do=1">
+								<a class="mdl-button mdl-button--colored" href="?do=1">
 									开始安装
 								</a>
 							<?php }?>
 						</div>
 					<?php
-						} elseif($do=='1'){
+						} elseif($do=='1') {
+						//Step 1 - Check
 					?>
 						<div class="mdl-card__supporting-text" align="center">
 							<h3 style="margin: 4px;">环境检查</h3>
@@ -139,22 +148,64 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>PHP 5.2+</td>
+									<td>PHP >= 5.4</td>
 									<td>必须</td>
 									<td><?php echo phpversion(); ?></td>
-									<td>PHP版本支持</td>
+									<td>PHP版本</td>
 								</tr>
 								<tr>
 									<td>mysqli_query()</td>
 									<td>必须</td>
 									<td><?php echo checkfunc('mysqli_query',true); ?></td>
-									<td>数据库查询</td>
+									<td>数据库</td>
+								</tr>
+								<tr>
+									<td>mysqli_fetch_array()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('mysqli_fetch_array',true); ?></td>
+									<td>数据库</td>
+								</tr>
+								<tr>
+									<td>mysqli_num_rows()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('mysqli_num_rows',true); ?></td>
+									<td>数据库</td>
+								</tr>
+								<tr>
+									<td>addslashes()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('addslashes',true); ?></td>
+									<td>转义</td>
+								</tr>
+								<tr>
+									<td>stripslashes()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('stripslashes',true); ?></td>
+									<td>转义</td>
+								</tr>
+								<tr>
+									<td>nl2br()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('nl2br',true); ?></td>
+									<td>转义</td>
+								</tr>
+								<tr>
+									<td>urlencode()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('urlencode',true); ?></td>
+									<td>转义</td>
+								</tr>
+								<tr>
+									<td>htmlspecialchars()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('htmlspecialchars',true); ?></td>
+									<td>转义</td>
 								</tr>
 								<tr>
 									<td>file_get_contents()</td>
-									<td>必须</td>
+									<td>可选</td>
 									<td><?php echo checkfunc('file_get_contents',true); ?></td>
-									<td>读取文件</td>
+									<td>文件</td>
 								</tr>
 							</tbody>
 						</table>
