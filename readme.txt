@@ -8,6 +8,10 @@ FSKYPHP-Note | Release 3.0
 -----升级日志：
 
 Release 3.00
+添加 支持Google Analytics
+添加 CSS丢到CDN了
+添加 转义防SQL注入
+添加 留言者邮箱
 添加 支持自定义表前缀
 更改 前端入口文件
 修复 一些小BUG

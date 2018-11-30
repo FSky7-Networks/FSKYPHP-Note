@@ -47,6 +47,21 @@
 				margin:8px;
 			}
 		</style>
+		<?php
+			if ($config['googleanalytics']) {
+		?>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=<?=$config['googleanalytics']?>"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', '<?=$config['googleanalytics']?>');
+		</script>
+		<?php
+			}
+		?>
 	</head>
 	<body>
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
@@ -189,19 +204,24 @@
 									<div style="max-width:300px;margin:16px;">
 										<div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
-												<input class="mdl-textfield__input" type="text" name="fromname" id="fromname" value="游客" required>
+												<input class="mdl-textfield__input" type="text" name="fromname" id="fromname" value="游客">
 												<label class="mdl-textfield__label" for="fromname">来自</label>
+											</div>
+											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+												<input class="mdl-textfield__input" type="text" name="mail" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" id="mail">
+												<label class="mdl-textfield__label" for="mail">邮箱</label>
+												<span class="mdl-textfield__error">邮箱格式不正确</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
 												<?php if ($config['toclock']) { ?>
 												<input class="mdl-textfield__input" type="text" name="toname" id="toname" value="<?=$config['toclock'] ?>" readonly>
 												<?php } else { ?>
-												<input class="mdl-textfield__input" type="text" name="toname" id="toname" required>
+												<input class="mdl-textfield__input" type="text" name="toname" id="toname">
 												<?php } ?>
 												<label class="mdl-textfield__label" for="toname">送给</label>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
-												<textarea class="mdl-textfield__input" type="text" rows="10" name="content" id="content" maxlength="512" width="100%" required></textarea>
+												<textarea class="mdl-textfield__input" type="text" rows="10" name="content" id="content" maxlength="512" width="100%"></textarea>
 												<label class="mdl-textfield__label" for="content">内容</label>
 											</div>
 										</div>
