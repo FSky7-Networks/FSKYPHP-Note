@@ -19,15 +19,10 @@
 		limitations under the License.
 	*/
 	
-	include("../command/command.php");
+	//Include
+	include("common.php");
 	
-	if ($_COOKIE['adminuser'] != $config['adminuser']) {
-		exit ('<script type="text/javascript">window.location.href="login.php";</script>');
-	} else if ($_COOKIE['password'] != $config['password']) {
-		exit ('<script type="text/javascript">window.location.href="login.php";</script>');
-	} else {
-		include("template/header.html");
-		include("template/setting.html");
-		include("template/footer.html");
-	}
+	include("template/header.html");
+	include("template/setting.html");
+	include("template/footer.html");
 ?>

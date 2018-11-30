@@ -4,7 +4,7 @@
 			<tbody>
 				<tr>
 					<td class="mdl-data-table__cell--non-numeric">总留言数</td>
-					<td><a href="message.php"><?=$count_message ?></a></td>
+					<td><a href="message.php"><?=mysqli_num_rows($data_list)?></a></td>
 				</tr>
 				<tr>
 					<td class="mdl-data-table__cell--non-numeric">现在时间</td>
@@ -25,10 +25,6 @@
 				<tr>
 					<td class="mdl-data-table__cell--non-numeric">网站配色</td>
 					<td><a><?=$config['style'] ?></a></td>
-				</tr>
-				<tr>
-					<td class="mdl-data-table__cell--non-numeric">网站头图</td>
-					<td><a href="<?=$config['headimage'] ?>" target="_blank"><?=$config['headimage'] ?></a></td>
 				</tr>
 				<tr>
 					<td class="mdl-data-table__cell--non-numeric">当前域名</td>

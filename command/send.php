@@ -19,6 +19,10 @@
 	$send_lastdate = $info_time;
 	$send_ip = $info_ip;
 	
+	if ($config['toclock']) {
+		$send_toname = $config['toclock'];
+	}
+
 	if ($config['loglog']) {
 		mysqli_query($mysql_conn,"INSERT INTO ".$mysql_tag."logs (`text` ,`time` ,`ip` ,`language` ,`nowadd` ,`hostname` ,`lastadd`) VALUES ('Send',  '".$info_time."',  '".$info_ip."',  '".$info_language."',  '//".$info_host."".$info_nowadd."',  '".$info_user."',  '".$info_lastadd."');");
 	}
@@ -26,7 +30,7 @@
 	if ($send_fromname && $send_toname && $send_content && $send_mail) {
 		if ($_COOKIE['sendt']!="clock") {
 			setcookie("sendt", "clock", time()+$config['sendt']);
-			mysqli_query($mysql_conn,"INSERT INTO ".$mysql_tag."list (`fromname` ,`toname` ,`content` ,`lastdate` ,`ip`) VALUES ('".$send_fromname."',  '".$send_toname."',  '".$send_content."',  '".$send_lastdate."',  '".$send_ip."');");
+			mysqli_query($mysql_conn,"INSERT INTO ".$mysql_tag."list (`fromname` ,`toname` ,`content` ,`lastdate` ,`ip` ,`mail`) VALUES ('".$send_fromname."',  '".$send_toname."',  '".$send_content."',  '".$send_lastdate."',  '".$send_ip."',  '".$send_mail."');");
 			echo '<script type="text/javascript">window.location.href="./";</script>';
 		} else {
 			echo '<script type="text/javascript">window.location.href="./?warning='.urlencode('<b>留言发送失败</b> 留言发送间隔 : '.$config['sendt'].' 秒').'";</script>';

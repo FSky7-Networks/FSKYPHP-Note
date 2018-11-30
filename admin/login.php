@@ -1,34 +1,29 @@
 <?php
 	/*
-		FlyingSky 留言墙程序 Release 2.00
+		FSKYPHP-Note
 		
-		后台登陆入口
+		模块 : 后台登录
+		时间 : 2018/11/30
+		环境 : LNMP PHP7.1
+		编写 : FlyingSky
+		检查 : FlyingSky
+		版本 : Release 3.0
 		
-		Copyright 2018 FlyingSky & FlyingGroup .
-
-		Licensed under the Apache License, Version 2.0 (the "License");
-		you may not use this file except in compliance with the License.
-		You may obtain a copy of the License at
-
-			http://www.apache.org/licenses/LICENSE-2.0
-
-		Unless required by applicable law or agreed to in writing, software
-		distributed under the License is distributed on an "AS IS" BASIS,
-		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-		See the License for the specific language governing permissions and
-		limitations under the License.
+		Copyright 2018 FlyingSky .
 	*/
 	
-	include("../command/command.php");
+	include("../command/common.php");
 
 	if ($_POST['adminuser'] && $_POST['password']) {
 		setcookie("adminuser",$_POST['adminuser'], time()+3600);
 		setcookie("password",$_POST['password'], time()+3600);
-		mysqli_query($mysql_conn,"INSERT INTO ".$mysql_tag."logs (`text` ,`time` ,`ip` ,`language` ,`nowadd` ,`hostname` ,`lastadd`) VALUES ('Login',  '".$info_time."',  '".$info_ip."',  '".$info_language."',  'http://".$info_host."".$info_nowadd."',  '".$info_user."',  '".$info_lastadd."');");
-		exit ('<script type="text/javascript">window.location.href="login.php";</script>');
+		if ($config['loglog']=="on") {
+			mysqli_query($mysql_conn,"INSERT INTO ".$mysql_tag."logs (`text` ,`time` ,`ip` ,`language` ,`nowadd` ,`hostname` ,`lastadd`) VALUES ('Login',  '".$info_time."',  '".$info_ip."',  '".$info_language."',  'http://".$info_host."".$info_nowadd."',  '".$info_user."',  '".$info_lastadd."');");
+		}
+		exit ('<script type="text/javascript">window.location.href="./login.php";</script>');
 	}
-	if ($_COOKIE['adminuser'] == $config['adminuser'] && $_COOKIE['password'] == $config['password']) {
-		exit ('<script type="text/javascript">window.location.href="index.php";</script>');
+	if ($_COOKIE['adminuser'] == $config['adminuser'] && md5($_COOKIE['password']) == $config['password']) {
+		exit ('<script type="text/javascript">window.location.href="./";</script>');
 	}
 ?>
 <!DOCTYPE html>
@@ -38,10 +33,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>管理登陆 - FSKYPHP-Note</title>
-		<link href="cover.css" rel="stylesheet">
-		<link rel="stylesheet" href="icon.css">
-		<link rel="stylesheet" href="/css/material.<?=$config['style']?>.min.css">
-		<script src="material.min.js"></script>
+		<link rel="stylesheet" href="<?=$config['cdn']?>Others/fskyphp-note-cover.css">
+		<link rel="stylesheet" href="<?=$config['cdn']?>Others/fskyphp-note-icon.css">
+		<link rel="stylesheet" href="<?=$config['cdn']?>GoogleMDL/material.<?=$config['style']?>.min.css">
+		<script src="<?=$config['cdn']?>GoogleMDL/material.min.js"></script>
 	</head>
 	<body>
 		<div class="site-wrapper">

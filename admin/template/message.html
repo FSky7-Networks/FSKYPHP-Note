@@ -8,6 +8,7 @@
 					<th>To</th>
 					<th>Text</th>
 					<th>Time</th>
+					<th>Mail</th>
 					<th>IP</th>
 					<th>Do</th>
 				</tr>
@@ -16,7 +17,7 @@
 				<?php
 					$read_perNumber="25"; //每页显示记录数
 					$read_page=$_GET['page']; //获得当前页面值
-					$read_totalPage=ceil($count_message/$read_perNumber);
+					$read_totalPage=ceil(mysqli_num_rows($data_list)/$read_perNumber);
 					if (!$read_page) {
 						$read_page=1;
 					}
@@ -30,6 +31,7 @@
 					<td><?=htmlspecialchars($rows['toname'])?></td>
 					<td><?=htmlspecialchars($rows['content'])?></td>
 					<td><?=$rows['lastdate']?></td>
+					<td><?=$rows['mail']?></td>
 					<td><?=$rows['ip']?></td>
 					<td><a href="set.php?mod=delete&class=message&id=<?=$rows['Id']?>">删除</a></td>
 					<div class="mdl-tooltip" data-mdl-for="message-<?=$rows['Id']?>"><?=$rows['content']?></div>

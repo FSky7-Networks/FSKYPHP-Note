@@ -2,20 +2,18 @@
 	/*
 		FSKYPHP-Note
 		
-		模块 : 后台处理后端
-		时间 : 2018/11/16
+		模块 : 后台设置保存
+		时间 : 2018/11/30
 		环境 : LNMP PHP7.1
+		编写 : FlyingSky
+		检查 : FlyingSky
+		版本 : Release 3.0
 		
 		Copyright 2018 FlyingSky .
 	*/
 	
-	include("../command/command.php");
+		include("common.php");
 	
-	if ($_COOKIE['adminuser'] != $config['adminuser']) {
-		exit ('<script type="text/javascript">window.location.href="login.php";</script>');
-	} else if ($_COOKIE['password'] != $config['password']) {
-		exit ('<script type="text/javascript">window.location.href="login.php";</script>');
-	} else {
 		if ($_GET['mod'] == "delete") {
 			if ($_GET['class'] == "message") {
 				mysqli_query($mysql_conn,"DELETE FROM ".$mysql_tag."list WHERE `Id` = ".$_GET['id'].";");
@@ -51,6 +49,7 @@
 					`style` =  '".$_POST['style']."',
 					`template` =  '".$_POST['template']."',
 					`background` =  '".$_POST['background']."',
+					`ico` =  '".$_POST['ico']."',
 					`headimage` =  '".$_POST['headimage']."'
 					WHERE  `".$mysql_tag."config`.`id` =1;
 				");
@@ -62,6 +61,7 @@
 					`sendt` =  '".$_POST['sendt']."',
 					`hikotoko` =  '".$_POST['hikotoko']."',
 					`toclock` =  '".$_POST['toclock']."',
+					`googleanalytics` =  '".$_POST['googleanalytics']."',
 					`readnumber` =  '".$_POST['readnumber']."'
 					WHERE  `".$mysql_tag."config`.`id` =1;
 				");
@@ -72,7 +72,7 @@
 					mysqli_query($mysql_conn,"
 						UPDATE `".$mysql_tag."config` SET
 						`adminuser` =  '".$_POST['adminuser']."',
-						`password` =  '".$_POST['password']."'
+						`password` =  '".md5($_POST['password'])."'
 						WHERE  `".$mysql_tag."config`.`id` =1;
 					");
 					exit ('<script type="text/javascript">window.location.href="setting.php";</script>');
@@ -86,5 +86,4 @@
 				}
 			}
 		}
-	}
 ?>

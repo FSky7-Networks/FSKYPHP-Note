@@ -145,13 +145,13 @@
 						?>
 						<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="min-height:50px !important;" align="left">
 							<div class="mdl-card__supporting-text" style="border-bottom: 1px solid rgba(0,0,0,.1);background:#F5F5F5;width:100%;">
-								<a><?=$rows['toname'] ?></a>
+								<a><?=stripslashes($rows['toname'])?></a>
 							</div>
 							<div class="mdl-card__supporting-text" style="min-height:50px;">
-								<p style="width:100%;font-size:14px;color:black;"><?=$rows['content'] ?></p>
+								<p style="width:100%;font-size:14px;color:black;"><?=stripslashes($rows['content'])?></p>
 							</div>
 							<div class="mdl-card__supporting-text" style="border-top: 1px solid rgba(0,0,0,.1);background:#F5F5F5;width:100%;">
-								来自: <?=$rows['fromname'] ?> | 时间: <?=$rows['lastdate'] ?>
+								来自: <?=stripslashes($rows['fromname'])?> | 时间: <?=stripslashes($rows['lastdate'])?>
 							</div>
 						</div>
 						<?php
