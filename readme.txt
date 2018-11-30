@@ -1,4 +1,4 @@
-FlyingSky 留言墙程序 Release 2.10
+FSKYPHP-Note | Release 3.0
 
 重要：<b>
 该程序<font color="green">允许二次开发</font>，但版权归属 <a href="https://studio.fsky7.com" target="_blank">FlyingSky's Studio</a> 所有，
@@ -6,6 +6,11 @@ FlyingSky 留言墙程序 Release 2.10
 开源协议 <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License</a> 。
 
 -----升级日志：
+
+Release 3.00
+添加 支持自定义表前缀
+更改 前端入口文件
+修复 一些小BUG
 
 Release 2.10
 添加 日志记录开关

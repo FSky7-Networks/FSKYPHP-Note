@@ -6,6 +6,7 @@
 		时间 : 2018/11/30
 		环境 : LNMP PHP7.1
 		编写 : FlyingSky
+		检查 : FlyingSky
 		版本 : Release 3.0
 		
 		Copyright 2018 FlyingSky .
@@ -202,6 +203,12 @@
 									<td>转义</td>
 								</tr>
 								<tr>
+									<td>md5()</td>
+									<td>必须</td>
+									<td><?php echo checkfunc('htmlspecialchars',true); ?></td>
+									<td>加密</td>
+								</tr>
+								<tr>
 									<td>file_get_contents()</td>
 									<td>可选</td>
 									<td><?php echo checkfunc('file_get_contents',true); ?></td>
@@ -210,15 +217,16 @@
 							</tbody>
 						</table>
 						<div class="mdl-card__actions mdl-card--border" align="center">
-							<a class="mdl-button mdl-button--colored" href="index.php?do=0">
+							<a class="mdl-button mdl-button--colored" href="./?do=0">
 								<<上一步
 							</a>
-							<a class="mdl-button mdl-button--colored" href="index.php?do=2">
+							<a class="mdl-button mdl-button--colored" href="./?do=2">
 								下一步>>
 							</a>
 						</div>
 					<?php
 						}elseif($do=='2'){
+						//Step 2 - Set Setting
 					?>
 						<div class="mdl-card__supporting-text" align="center">
 							<h3 style="margin: 4px;">数据库配置</h3>
@@ -229,7 +237,7 @@
 							<div class="auxbar bar bar3" style="width: 0%;"></div>
 						</div>
 						<div class="mdl-card__supporting-text" align="center">			
-							<form action="?do=3" class="form-sign" method="post">
+							<form action="./?do=3" class="form-sign" method="post">
 								<div style="max-width:300px;margin:16px;">
 									<div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty" data-upgraded=",MaterialTextfield">
@@ -245,7 +253,7 @@
 											<label class="mdl-textfield__label" for="fromname">数据库用户名</label>
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty" data-upgraded=",MaterialTextfield">
-											<input class="mdl-textfield__input" type="text" name="db_pwd" required>
+											<input class="mdl-textfield__input" type="password" name="db_pwd" required>
 											<label class="mdl-textfield__label" for="fromname">数据库密码</label>
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty" data-upgraded=",MaterialTextfield">
@@ -253,17 +261,18 @@
 											<label class="mdl-textfield__label" for="fromname">数据库名称</label>
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty" data-upgraded=",MaterialTextfield">
-											<input class="mdl-textfield__input" type="text" name="db_qz" value="wall" readonly>
+											<input class="mdl-textfield__input" type="text" name="db_tag" value="wall_" required>
 											<label class="mdl-textfield__label" for="fromname">数据表前缀</label>
 										</div>
 									</div>
 									<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:100%;margin-top:16px;margin-bottom:0px;" name="submit" value="保存配置">
 								</div>
 							</form>
-							（如果已事先填写好config.php相关数据库配置，请 <a href="?do=3&jump=1">点击此处</a> 跳过这一步！）
+							（如果已事先填写好config.php相关数据库配置，请 <a href="./?do=3&jump=1">点击此处</a> 跳过这一步！）
 						</div>
 					<?php 
 						}elseif($do=='3'){
+						//Step 3 - Save Setting
 					?>
 						<div class="mdl-card__supporting-text" align="center">
 							<h3 style="margin: 4px;">保存数据库</h3>
@@ -276,27 +285,26 @@
 					<?php
 							if($_GET['jump']==1){
 								include_once '../command/config.php';
-								if(!$mysql_server||!$mysql_use||!$mysql_password||!$mysql_database) {
+								if(!$mysql_server||!$mysql_use||!$mysql_password||!$mysql_database||!$mysql_tag) {
 					?>
 						<div class="mdl-card__supporting-text">
 							请先填写好数据库并保存后再安装！
 						</div>
 						<div class="mdl-card__actions mdl-card--border" align="center">
-							<a class="mdl-button mdl-button--colored" href="index.php?do=2">
+							<a class="mdl-button mdl-button--colored" href="./?do=2">
 								<<上一步
 							</a>
 						</div>
 					<?php
 								}
 							} else {
-								
-								$config="
+								//Save File
+$config="
 <?php
 	/*
-		FSKYPHP-Note Release 2.10
-		Copyright 2018 FlyingSky & FlyingGroup .
+		FSKYPHP-Note
 		
-		配置模块
+		Setting
 	*/
 	
 	//MySQL服务器地址
@@ -312,15 +320,15 @@
 	\$mysql_database='".$_POST['db_name']."';
 	
 	//MySQL表前缀
-	\$mysql_tag='".$_POST['db_qz']."_';
+	\$mysql_tag='".$_POST['db_tag']."';
 	
 ?>
-								";
+";
 
 								if(file_put_contents('../command/config.php',$config)){
 									
 									echo '<div class="mdl-card__supporting-text">数据库配置文件保存成功！</div>';
-									echo '<div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="index.php?do=4">创建数据表>></a></div>';
+									echo '<div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="./?do=4">创建数据表>></a></div>';
 								
 								}else echo '
 									<div class="mdl-card__supporting-text">保存失败，请确保网站根目录有写入权限</div>
@@ -332,6 +340,7 @@
 								';
 							}
 						}elseif($do=='4'){
+						//Step 4 - SQL Write
 					?>
 						<div class="mdl-card__supporting-text" align="center">
 							<h3 style="margin: 4px;">创建数据表</h3>
@@ -343,7 +352,7 @@
 						</div>
 					<?php
 							include_once '../command/config.php';
-							if(!$mysql_server||!$mysql_user||!$mysql_password||!$mysql_database) {
+							if(!$mysql_server||!$mysql_user||!$mysql_password||!$mysql_database||!$mysql_tag) {
 								echo '<div class="mdl-card__supporting-text">请先填写好数据库并保存后再安装！</div><div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="javascript:history.back(-1)"><<上一步</a></div>';
 							} else {
 								$mysql_conn = mysqli_connect($mysql_server,$mysql_user,$mysql_password);
@@ -353,7 +362,7 @@
 								mysqli_select_db($mysql_conn,$mysql_database);
 								mysqli_query($mysql_conn,"set names utf8");
 								mysqli_query($mysql_conn,"
-									CREATE TABLE IF NOT EXISTS `wall_config` (
+									CREATE TABLE IF NOT EXISTS `".$mysql_tag."config` (
 										`id` int(5) NOT NULL,
 										`name` text NOT NULL,
 										`title` text NOT NULL,
@@ -369,15 +378,18 @@
 										`password` text NOT NULL,
 										`loglog` TEXT NOT NULL,
 										`ico` TEXT NOT NULL,
+										`cdn` text NOT NULL,
+										`googleanalytics` text NOT NULL,
 										`sendt` int(3) NOT NULL,
 										PRIMARY KEY (`id`)
 									) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 								");
 								mysqli_query($mysql_conn,"
-									CREATE TABLE IF NOT EXISTS `wall_list` (
+									CREATE TABLE IF NOT EXISTS `".$mysql_tag."list` (
 										`Id` int(11) NOT NULL AUTO_INCREMENT,
 										`fromname` text NOT NULL,
 										`toname` text NOT NULL,
+										`mail` text NOT NULL,
 										`content` text NOT NULL,
 										`lastdate` text NOT NULL,
 										`ip` text NOT NULL,
@@ -385,7 +397,7 @@
 									) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 								");
 								mysqli_query($mysql_conn,"
-									CREATE TABLE IF NOT EXISTS `wall_logs` (
+									CREATE TABLE IF NOT EXISTS `".$mysql_tag."logs` (
 										`id` int(11) NOT NULL AUTO_INCREMENT,
 										`text` text,
 										`ip` text,
@@ -398,7 +410,7 @@
 									) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 								");
 								mysqli_query($mysql_conn,"
-									CREATE TABLE IF NOT EXISTS `wall_menu` (
+									CREATE TABLE IF NOT EXISTS `".$mysql_tag."menu` (
 										`id` int(5) NOT NULL,
 										`name` text NOT NULL,
 										`link` text NOT NULL,
@@ -406,21 +418,22 @@
 									) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 								");
 								mysqli_query($mysql_conn,"
-									INSERT INTO `wall_config` (
-										`id`, `name`, `title`, `style`, `background`, `headimage`, `hikotoko`, `copyright`, `toclock`, `readnumber`, `template`, `adminuser`, `password`, `ico`
+									INSERT INTO `".$mysql_tag."config` (
+										`id`, `name`, `title`, `style`, `background`, `headimage`, `hikotoko`, `copyright`, `toclock`, `readnumber`, `template`, `adminuser`, `password`, `ico`, `cdn`
 									) VALUES(
-										1, 'FSKYPHP-Note', 'FlyingSky', 'blue-light_blue', '#ff40810d', 'http://flyingsky.gq/sakura.png', '', 'Copyright © 2016 - 2018 <a>FlyingSky</a> . All Rights Reserved .', '', 10, 'default', 'admin', '123456', 'favicon.ico'
+										1, 'FSKYPHP-Note', 'FlyingSky', 'blue-light_blue', '#ff40810d', './command/bingpic.php', '', 'Copyright © 2017 - 2019 <a>FlyingSky</a> . All Rights Reserved .', '', 10, 'default', 'admin', '".md5('123456')."', './favicon.ico', 'https://github.cdn.fsky7.com/'
 									);
 								");
 								if(mysqli_query($mysql_conn,"select * from ".$mysql_tag."config")) {
 									echo '<div class="mdl-card__supporting-text">安装成功！</div>
-									<div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="index.php?do=5">下一步>></a></div>';
+									<div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="./?do=5">下一步>></a></div>';
 								} else {
 									echo '<div class="mdl-card__supporting-text">安装失败！</div>
-									<div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="index.php?do=4">重试</a></div>';
+									<div class="mdl-card__actions mdl-card--border" align="center"><a class="mdl-button mdl-button--colored" href="./?do=4">重试</a></div>';
 								}
 							}
 						}elseif($do=='5'){
+						//Step 5 - Finish
 					?>
 						<div class="mdl-card__supporting-text" align="center">
 							<h3 style="margin: 4px;">安装完成</h3>
@@ -434,38 +447,33 @@
 							@file_put_contents("install.lock",'安装锁');
 							echo '
 								<div class="mdl-card__supporting-text">
-									安装完成！管理账号和密码是:admin/123456<br>
-									如果你的空间不支持本地文件读写，请自行在install/ 目录建立 install.lock 文件！<br>
+									安装完成！默认管理账号和密码是: admin / 123456<br>
+									如果你的空间不支持本地文件读写，请自行在 install 目录建立 install.lock 文件！<br>
 									更多设置选项请登录后台管理进行修改。
 								</div>
 								<div class="mdl-card__actions mdl-card--border" align="center">
 									<a class="mdl-button mdl-button--colored"href="../">网站首页</a>
-									<a class="mdl-button mdl-button--colored"href="../admin">后台管理</a>
+									<a class="mdl-button mdl-button--colored"href="../admin/">后台管理</a>
 								</div>
 							';
-						}elseif($do=='6'){
+						} else {
+						//Step tan90
 					?>
 						<div class="mdl-card__supporting-text" align="center">
-							<h3 style="margin: 4px;">安装完成</h3>
+							<h3 style="margin: 4px;">步骤错误</h3>
 						</div>
 						<div class="mdl-progress mdl-js-progress is-upgraded" style="width:100%;">
-							<div class="progressbar bar bar1" style="width: 100%;"></div>
+							<div class="progressbar bar bar1" style="width: 0%;"></div>
 							<div class="bufferbar bar bar2" style="width: 100%;"></div>
 							<div class="auxbar bar bar3" style="width: 0%;"></div>
 						</div>
+						<div class="mdl-card__supporting-text">
+							不存在的步骤
+						</div>
+						<div class="mdl-card__actions mdl-card--border" align="center">
+							<a class="mdl-button mdl-button--colored" href="./">返回</a>
+						</div>
 					<?php
-							@file_put_contents("install.lock",'安装锁');
-							echo '
-								<div class="mdl-card__supporting-text">
-									安装完成！管理账号和密码是:admin/123456<br>
-									如果你的空间不支持本地文件读写，请自行在install/ 目录建立 install.lock 文件！<br>
-									更多设置选项请登录后台管理进行修改。
-								</div>
-								<div class="mdl-card__actions mdl-card--border" align="center">
-									<a class="mdl-button mdl-button--colored"href="../">网站首页</a>
-									<a class="mdl-button mdl-button--colored"href="../admin">后台管理</a>
-								</div>
-							';
 						}
 					?>
 					</div>
