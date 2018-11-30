@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		<title>管理面板 - FSKYPHP-Note</title>
+		<link rel="stylesheet" href="css.css">
+		<link rel="stylesheet" href="icon.css">
+		<link rel="stylesheet" href="/css/material.<?=$config['style']?>.min.css">
+		<link rel="stylesheet" href="styles.css">
+		<script src="material.min.js"></script>
+		<style>
+			#view-source {
+				position: fixed;
+				display: block;
+				right: 0;
+				bottom: 0;
+				margin-right: 40px;
+				margin-bottom: 40px;
+				z-index: 900;
+			}
+			a {
+				text-decoration: none; 
+			}
+			.demo-card-wide.mdl-card {
+				width: 100%;
+				margin:6px;
+				opacity:0.95;
+				min-height:10px;!important
+			}
+			.demo-card-wide > .mdl-card__title {
+				color: #fff;
+				height: 176px;
+				background: url('bilicraft.png') center / cover;
+			}
+			.demo-card-wide > .mdl-card__menu {
+				color: #fff;
+			}
+			.mdl-radio {
+				margin:8px;
+			}
+			.table_box_big{overflow-x: scroll;overflow-y: hidden;position: relative;height: 100%;}
+			.table_box{position: absolute;height: 100%;}
+			.mdl-button {
+				margin:8px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+			<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+				<div class="mdl-layout__header-row">
+					<span class="mdl-layout-title">管理面板</span>
+					<div class="mdl-layout-spacer"></div>
+					<a class="mdl-navigation__link" style="color:#444;">FSKYPHP-Note</a>
+					<a href="https://studio.fsky7.com/project/FSKYPHP-Note" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" target="_blank">
+						<i class="material-icons">info_outline</i>
+					</a>
+					<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+						<a href="http://flyingsky.gq/"><li class="mdl-menu__item">团队主站</li></a>
+						<a href="http://check.flyingsky.gq/"><li class="mdl-menu__item mdl-menu__item--full-bleed-divider">授权中心</li></a>
+						<a href="logout.php"><li class="mdl-menu__item">退出登陆</li></a>
+					</ul>
+				</div>
+			</header>
+			<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+				<header class="demo-drawer-header">
+					<div class="demo-avatar-dropdown">
+						<span><?=$info_host ?></span>
+					</div>
+				</header>
+				<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+					<a class="mdl-navigation__link" href="index.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>首页</a>
+					<a class="mdl-navigation__link" href="message.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">message</i>留言</a>
+					<a class="mdl-navigation__link" href="logs.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">list</i>日志</a>
+					<a class="mdl-navigation__link" href="menu.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>导航</a>
+					<a class="mdl-navigation__link" href="setting.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>设置</a>
+					<div class="mdl-layout-spacer"></div>
+					<a class="mdl-navigation__link" href="logout.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">exit_to_app</i>登出</a>
+				</nav>
+			</div>
+			<main class="mdl-layout__content mdl-color--grey-100">
+				<div class="mdl-grid demo-content">

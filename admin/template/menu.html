@@ -1,0 +1,41 @@
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="left">
+	<table class="mdl-data-table mdl-js-data-table" style="width:100%">
+		<thead>
+			<tr>
+				<th class="mdl-data-table__cell--non-numeric">ID</th>
+				<th>From</th>
+				<th>Text</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+				$result=mysqli_query($mysql_conn,"select * from ".$mysql_tag."menu order by id ;");
+				while ($rows=mysqli_fetch_array($result)) {
+			?>
+			<tr>
+				<td class="mdl-data-table__cell--non-numeric"><?=$rows['id']?></td>
+				<td><?=$rows['name']?></td>
+				<td><?=$rows['link']?></td>
+				<td><a href="set.php?mod=delete&class=menu&id=<?=$rows['Id']?>">删除</a></td>
+			</tr>
+			<?php
+				}
+			?>
+		</tbody>
+	</table>
+</div>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
+	<div class="mdl-card__supporting-text">
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="add.php?class=menu">添加</a>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=1">首页</a>
+		<?php if ($read_page != 1) { ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_page - 1;?>">上页</a>
+		<?php } ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_page;?>"><?php echo $read_page ?>/<?php echo $read_totalPage ?></a>
+		<?php if ($read_page<$read_totalPage) { //page小于总页数,显示下页链接 ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_page + 1;?>">下页</a>
+		<?php } ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_totalPage;?>">尾页</a>
+	</div>
+</div>

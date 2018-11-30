@@ -1,0 +1,56 @@
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="left">
+	<div class="table_box_big">
+		<table class="mdl-data-table mdl-js-data-table" style="width:100%">
+			<thead>
+				<tr>
+					<th class="mdl-data-table__cell--non-numeric">ID</th>
+					<th>From</th>
+					<th>To</th>
+					<th>Text</th>
+					<th>Time</th>
+					<th>IP</th>
+					<th>Do</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$read_perNumber="25"; //每页显示记录数
+					$read_page=$_GET['page']; //获得当前页面值
+					$read_totalPage=ceil($count_message/$read_perNumber);
+					if (!$read_page) {
+						$read_page=1;
+					}
+					$read_startCount=($read_page-1)*$read_perNumber;
+					$result=mysqli_query($mysql_conn,"select * from ".$mysql_tag."list order by Id desc limit ".$read_startCount.",".$read_perNumber." ;");
+					while ($rows=mysqli_fetch_array($result)) {
+				?>
+				<tr id="message-<?=$rows['Id']?>">
+					<td class="mdl-data-table__cell--non-numeric"><?=$rows['Id']?></td>
+					<td><?=htmlspecialchars($rows['fromname'])?></td>
+					<td><?=htmlspecialchars($rows['toname'])?></td>
+					<td><?=htmlspecialchars($rows['content'])?></td>
+					<td><?=$rows['lastdate']?></td>
+					<td><?=$rows['ip']?></td>
+					<td><a href="set.php?mod=delete&class=message&id=<?=$rows['Id']?>">删除</a></td>
+					<div class="mdl-tooltip" data-mdl-for="message-<?=$rows['Id']?>"><?=$rows['content']?></div>
+				</tr>
+				<?php
+					}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
+	<div class="mdl-card__supporting-text">
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=1">首页</a>
+		<?php if ($read_page != 1) { ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_page - 1;?>">上页</a>
+		<?php } ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_page;?>"><?php echo $read_page ?>/<?php echo $read_totalPage ?></a>
+		<?php if ($read_page<$read_totalPage) { //page小于总页数,显示下页链接 ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_page + 1;?>">下页</a>
+		<?php } ?>
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="?page=<?php echo $read_totalPage;?>">尾页</a>
+	</div>
+</div>

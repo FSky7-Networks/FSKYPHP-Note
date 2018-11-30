@@ -1,0 +1,114 @@
+<?php
+	$aaa=htmlspecialchars($config['copyright']);
+?>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
+	<div class="mdl-card__supporting-text">
+		<h4>站点基本信息</h4>
+		<div style="max-width:300px;">
+			<form action="set.php?mod=setting&class=name" method="post" onSubmit="return chkinput(this)" style="width:100%;">  
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="name" id="name" value="<?=$config['name']?>">
+					<label class="mdl-textfield__label" for="name">名称</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="title" id="title" value="<?=$config['title']?>">
+					<label class="mdl-textfield__label" for="title">后缀</label>
+				</div>
+				<label class="mdl-switch mdl-js-switch" for="loglog" align="right" style="padding-top: 4px;margin-bottom: 20px;padding-bottom: 4px;">
+					<input type="checkbox" name="loglog" id="loglog" class="mdl-switch__input" <?php if ($config['loglog']=="on") echo 'checked';?>>
+					<span>访问日志记录</span>
+				</label>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<textarea class="mdl-textfield__input" type="text" name="copyright" id="copyright" rows= "5"><?=$aaa ?></textarea>
+					<label class="mdl-textfield__label" for="copyright">版权</label>
+				</div>
+				<input type="submit" name="submit" value="设置" style="width:100%;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" /></td>  
+			</form>
+		</div>
+	</div>
+</div>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
+	<div class="mdl-card__supporting-text">
+		<h4>站点样式设置</h4>
+		<div style="max-width:300px;">
+			<form action="set.php?mod=setting&class=style" method="post" onSubmit="return chkinput(this)" style="width:100%;">  
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="ico" id="ico" value="<?=$config['ico']?>">
+					<label class="mdl-textfield__label" for="ico">网站ICO</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="style" id="style" value="<?=$config['style']?>">
+					<label class="mdl-textfield__label" for="style">配色方案</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<select class="mdl-textfield__input" name="template" >
+						<?php
+							$template_fils=opendir("../template");
+							while ($template_row=readdir($template_fils)) {
+								if ($template_row=="."||$template_row==".."){continue;}
+						?>
+						<option value="<?=$template_row ?>" <?php if($template_row==$config['template']) echo 'selected';?>><?=$template_row ?></option>
+						<?php
+							}
+							closedir($template_fils);
+						?>
+					</select>
+					<label class="mdl-textfield__label" for="template">模板设置</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="background" id="background" value="<?=$config['background']?>">
+					<label class="mdl-textfield__label" for="background">背景设置</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="headimage" id="headimage" value="<?=$config['headimage']?>">
+					<label class="mdl-textfield__label" for="headimage">首页图片</label>
+				</div>
+				<input type="submit" name="submit" value="设置" style="width:100%;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" /></td>  
+			</form>
+		</div>
+	</div>
+</div>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
+	<div class="mdl-card__supporting-text">
+		<h4>其他站点设置</h4>
+		<div style="max-width:300px;">
+			<form action="set.php?mod=setting&class=other" method="post" onSubmit="return chkinput(this)" style="width:100%;">  
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="num" name="sendt" id="sendt" value="<?=$config['sendt']?>">
+					<label class="mdl-textfield__label" for="sendt">留言发送间隔(秒)</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="hikotoko" id="hikotoko" value="<?=$config['hikotoko']?>">
+					<label class="mdl-textfield__label" for="hikotoko">自定义Hikotoko</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="toclock" id="toclock" value="<?=$config['toclock']?>">
+					<label class="mdl-textfield__label" for="toclocke">锁定收信人</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="number" name="readnumber" id="readnumber" value="<?=$config['readnumber']?>">
+					<label class="mdl-textfield__label" for="readnumber">每页显示数目</label>
+				</div>
+				<input type="submit" name="submit" value="设置" style="width:100%;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" /></td>  
+			</form>
+		</div>
+	</div>
+</div>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
+	<div class="mdl-card__supporting-text">
+		<h4>管理账号设置</h4>
+		<div style="max-width:300px;">
+			<form action="set.php?mod=setting&class=admin" method="post" onSubmit="return chkinput(this)" style="width:100%;">  
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="text" name="adminuser" id="adminuser" value="<?=$config['adminuseer']?>">
+					<label class="mdl-textfield__label" for="adminuser">管理员账号</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+					<input class="mdl-textfield__input" type="password" name="password" id="password" value="<?=$config['password']?>">
+					<label class="mdl-textfield__label" for="password">管理员密码</label>
+				</div>
+				<input type="submit" name="submit" value="设置" style="width:100%;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" /></td>  
+			</form>
+		</div>
+	</div>
+</div>

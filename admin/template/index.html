@@ -1,0 +1,44 @@
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="left">
+	<div class="table_box_big">
+		<table class="mdl-data-table mdl-js-data-table" style="width:100%">
+			<tbody>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">总留言数</td>
+					<td><a href="message.php"><?=$count_message ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">现在时间</td>
+					<td><a><?=$info_time ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">网站名称</td>
+					<td><a><?=$config['name'] ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">网站后缀</td>
+					<td><a><?=$config['title'] ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">网站模板</td>
+					<td><a><?=$config['template'] ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">网站配色</td>
+					<td><a><?=$config['style'] ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">网站头图</td>
+					<td><a href="<?=$config['headimage'] ?>" target="_blank"><?=$config['headimage'] ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">当前域名</td>
+					<td><a href="//<?=$info_host ?>" target="_blank"><?=$info_host ?></a></td>
+				</tr>
+				<tr>
+					<td class="mdl-data-table__cell--non-numeric">程序名称</td>
+					<td><a><?=$info_application ?></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
