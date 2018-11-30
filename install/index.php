@@ -3,7 +3,7 @@
 		FSKYPHP-Note
 		
 		模块 : 安装程序
-		时间 : 2018/11/10
+		时间 : 2018/11/30
 		环境 : LNMP PHP7.1
 		
 		Copyright 2018 FlyingSky .
@@ -40,15 +40,15 @@
 	}
 
 ?>
-<html lang="zh-cn">
+<html>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>安装程序 | FSKYPHP-Note</title>
-		<link rel="stylesheet" href="/css/icon.css">
-		<link rel="stylesheet" href="http://cdn.flyingsky.ml/material/material.blue-light_blue.min.css">
-		<script defer src="./css/material.min.js"></script>
+		<link rel="stylesheet" href="https://github.cdn.fsky7.com/GoogleMDL/icon.css">
+		<link rel="stylesheet" href="https://github.cdn.fsky7.com/GoogleMDL/material.blue-light_blue.min.css">
+		<script src="https://github.cdn.fsky7.com/GoogleMDL/material.min.js"></script>
 		<style>
 			#view-source {
 				position: fixed;

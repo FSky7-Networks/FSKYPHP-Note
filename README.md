@@ -7,7 +7,7 @@ PHP 留言墙程序
 开源协议[Apache License](http://www.apache.org/licenses/LICENSE-2.0)。
 
 ## 升级日志：
-详见[README.txt](https://github.com/FlyingSky-CN/FSKYPHP-Note/blob/master/README.txt)
+详见[README.txt](https://github.com/FlyingSky-CN/FSKYPHP-Note/blob/master/readme.txt)
 
 ## 开源声明：
 
