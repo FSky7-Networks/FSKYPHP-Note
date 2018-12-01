@@ -14,11 +14,6 @@
 	
 	session_start();
 	
-	//Installed or not
-	if(!file_exists('./install/install.lock') && !file_exists('../install/install.lock')){
-		exit('<script type="text/javascript">window.location.href="./install/";</script>');
-	}
-	
 	//Get Information
 	$info_ip = $_SERVER["REMOTE_ADDR"];
 	$info_time = date("Y-m-d H:i:s");

@@ -12,6 +12,11 @@
 		Copyright 2018 FlyingSky .
 	*/
 	
+	//Installed or not
+	if(!file_exists('./install/install.lock')){
+		exit('<script type="text/javascript">window.location.href="./install/";</script>');
+	}
+	
 	//Common
 	include("./command/common.php");
 	
