@@ -1,3 +1,8 @@
+<?php
+	$sql = "SELECT COUNT(*) FROM ".$mysql_tag."logs";
+	$row = mysqli_fetch_array(mysqli_query($mysql_conn,$sql));
+	$count_visit = $row[0];
+?>
 <div class="demo-card-wide mdl-card mdl-shadow--2dp" align="left">
 	<div class="table_box_big">
 			<table class="mdl-data-table mdl-js-data-table" style="width:100%">
