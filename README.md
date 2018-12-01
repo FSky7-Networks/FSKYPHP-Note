@@ -1,5 +1,5 @@
 # FSKYPHP-Note
-一个用 PHP 编写的轻量级留言墙程序 | [https://studio.fsky7.com/project/FSKYPHP-Note](https://studio.fsky7.com/project/FSKYPHP-Note)
+PHP 留言墙程序
 
 ## 重要
 该程序**允许二次开发**，但版权归属[FlyingSky's Studio](https://studio.fsky7.com)所有，
