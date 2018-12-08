@@ -104,8 +104,11 @@
 			
 			function UpPage(pages)
 			{
-				if (page<=1)
+				if (pages<=1)
 				{
+					pages = 1;
+					page=pages;
+					document.getElementById("pages").innerHTML=pages + " / <?=mysqli_num_rows($data_list)?>";
 					loadXMLDoc('/template/1833/ajax.php?mod=message&class=1');
 				}
 				else
@@ -119,8 +122,11 @@
 			
 			function DownPage(pages)
 			{
-				if (page>=<?=mysqli_num_rows($data_list)?>)
+				if (pages>=<?=mysqli_num_rows($data_list)?>)
 				{
+					pages = <?=mysqli_num_rows($data_list)?>;
+					page=pages;
+					document.getElementById("pages").innerHTML=pages + " / <?=mysqli_num_rows($data_list)?>";
 					loadXMLDoc('/template/1833/ajax.php?mod=message&class=<?=mysqli_num_rows($data_list)?>');
 				}
 				else
@@ -138,6 +144,7 @@
 				page=pages;
 				fadeOut(document.getElementById("home"));
 				fadeIn(document.getElementById("look"));
+				document.getElementById("pages").innerHTML="1 / <?=mysqli_num_rows($data_list)?>";
 				loadXMLDoc('/template/1833/ajax.php?mod=message&class=1');
 			}
 			
@@ -175,7 +182,7 @@
 		<div class="site-wrapper">
 			<div class="site-wrapper-inner">
 				<div class="cover-container">
-					<div class="inner cover">
+					<div class="inner cover" style="margin-bottom: 64px;margin-top: 64px;">
 						<h3>For 1833 - 框女</h3>
 						<div id="home" align="center">
 							<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="left">
@@ -236,6 +243,13 @@
 								<a 
 									class="mdl-button mdl-js-button mdl-js-ripple-effect" 
 									style="color:#fff;" 
+									onclick="UpPage(1)"
+								>
+								   首页
+								</a>
+								<a 
+									class="mdl-button mdl-js-button mdl-js-ripple-effect" 
+									style="color:#fff;" 
 									onclick="UpPage(page)"
 								>
 								   上一页
@@ -254,13 +268,19 @@
 								>
 								   下一页
 								</a>
+								<a 
+									class="mdl-button mdl-js-button mdl-js-ripple-effect" 
+									style="color:#fff;" 
+									onclick="DownPage(<?=mysqli_num_rows($data_list)?>)"
+								>
+								   尾页
+								</a>
 							</div>
 						</div>
 						<div id="new" align="center" style="display:none;">
-							<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="min-height:50px !important;" align="center">
+							<div class="demo-card-wide mdl-card mdl-shadow--2dp" align="center">
 								<div class="mdl-card__supporting-text">
 									<form action="./?send=true" method="post">
-										<div style="max-width:300px;margin:16px;">
 											<div>
 												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
 													<input class="mdl-textfield__input" type="text" name="fromname" id="fromname" value="游客">
@@ -286,7 +306,6 @@
 											</div>
 											<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:auto;margin-top:16px;margin-bottom:0px;padding-left:34px;padding-right:34px;" type="submit" id="submit" value="发送">
 											<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:auto;margin-top:16px;margin-bottom:0px;" onclick="BackHome()">返回</a>
-										</div>
 									</form>
 								</div>
 							</div>
